@@ -11,7 +11,7 @@ export function FilledButton({title, style, onPress}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#00ff87',
+    backgroundColor: '#009387',
     width: '60%',
     height: 40,
     marginTop: 90,

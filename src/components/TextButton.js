@@ -16,6 +16,6 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: '#00ff87',
+    color: '#009387',
   }
 }); 

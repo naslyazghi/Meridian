@@ -18,9 +18,10 @@ export function LoginScreen({navigation}) {
     <Input style={styles.input} secureTextEntry placeholder={"Password"} placeholderTextColor = {"white"}/>
     <TextButton style={{alignItems: 'flex-end'}} title={"Forgot Password?"} 
       onPress={() => {}}/>
-    <FilledButton title={'Login'} style={styles.loginButton} onPress={() => {}}/>
+    <FilledButton title={'Login'} style={styles.loginButton} 
+      onPress={() => {navigation.navigate('Main')}}/>
     <TextButton title={"Don't have an account?  Create one"} 
-      onPress={() => {navigation.navigate('Register');}}/>
+      onPress={() => {navigation.navigate('Register')}}/>
   </AuthContainer>
   );
 }

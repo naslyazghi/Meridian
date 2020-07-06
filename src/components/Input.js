@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     height: 40,
     marginBottom: 30,
     color: 'white',
-    borderColor: '#00ff87',
+    borderColor: '#009387',
     borderBottomWidth: 1,
   },
 });
