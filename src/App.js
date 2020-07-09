@@ -2,8 +2,6 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {AuthStackNavigator} from './navigators/AuthStackNavigator';
-import {MainStackNavigator} from './navigators/MainStackNavigator';
 import { lightTheme } from './themes/light';
 import { AuthContext } from './contexts/AuthContext';
 import { LoginScreen } from './screens/LoginScreen';

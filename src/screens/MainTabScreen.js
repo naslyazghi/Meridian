@@ -1,18 +1,12 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { MainScreen } from './MainScreen';
-import { ExpenseLogScreen } from './ExpenseLogScreen';
-import { MembersScreen } from './MembersScreen'
 import Icon from 'react-native-ionicons';
-//import Icon from 'react-native-vector-icons/Ionicons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-//import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MainStackScreen from '../stacks/MainStackScreen';
+import MemberstackScreen from '../stacks/MemberstackScreen';
+import ExpensesStackScreen from '../stacks/ExpensesStackScreen';
 
 const Tab = createMaterialBottomTabNavigator();
-
-const MainStack = createStackNavigator();
-
 
 const MainTabScreen = () => {
   return (
@@ -26,15 +20,16 @@ const MainTabScreen = () => {
         name="Main"
         component={MainStackScreen}
         options={{
-          tabBarLabel: 'Main',
+          tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
             <Icon name="home" color={color} size={26} />
           ),
         }}
       />
+      
       <Tab.Screen
         name="Members"
-        component={MembersScreen}
+        component={MemberstackScreen}
         options={{
           tabBarLabel: 'Members',
           tabBarIcon: ({ color }) => (
@@ -45,7 +40,7 @@ const MainTabScreen = () => {
       
       <Tab.Screen
         name="Expense"
-        component={ExpenseLogScreen}
+        component={ExpensesStackScreen}
         options={{
           tabBarLabel: 'Expense Log',
           tabBarIcon: ({ color }) => (
@@ -58,24 +53,3 @@ const MainTabScreen = () => {
 }
 
 export default MainTabScreen; 
-
-// Main Stack
-const MainStackScreen = ({navigation}) => (
-    <MainStack.Navigator>
-      <MainStack.Screen name={'Main'} component={MainScreen} 
-        options={{
-          title: 'Meridian',
-          headerLeft: () => (
-            <Icon name='menu' size={30} backgroundColor={'#ffff'} color={'white'}
-            onPress = {() => navigation.openDrawer()}></Icon>
-          ),
-          headerStyle: {
-            backgroundColor: '#009387',
-          },
-          headerTintColor: '#ffff',
-          headerTitleStyle: {
-          // Add a font style here
-          }
-      }}/>
-    </MainStack.Navigator>
-);

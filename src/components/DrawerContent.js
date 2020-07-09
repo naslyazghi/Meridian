@@ -3,7 +3,6 @@ import {View, StyleSheet} from 'react-native';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch} from 'react-native-paper'
 import Icon from 'react-native-ionicons';
-import { color } from 'react-native-reanimated';
 
 
 export function DrawerContent(props, navigation) {
