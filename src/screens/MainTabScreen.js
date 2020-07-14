@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import Icon from 'react-native-ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MainStackScreen from '../stacks/MainStackScreen';
 import MemberstackScreen from '../stacks/MemberstackScreen';
@@ -22,7 +23,7 @@ const MainTabScreen = () => {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
-            <Icon name="home" color={color} size={26} />
+            <Feather name="home" color={color} size={26} />
           ),
         }}
       />
@@ -33,7 +34,7 @@ const MainTabScreen = () => {
         options={{
           tabBarLabel: 'Members',
           tabBarIcon: ({ color }) => (
-            <Icon name="people" color={color} size={26} />
+            <Feather name="users" color={color} size={26} />
           ),
         }}
       />
@@ -44,7 +45,7 @@ const MainTabScreen = () => {
         options={{
           tabBarLabel: 'Expense Log',
           tabBarIcon: ({ color }) => (
-            <Icon name="cash" color={color} size={26}/>
+            <Feather name="dollar-sign" color={color} size={26}/>
           ),
         }}
       />

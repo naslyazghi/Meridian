@@ -21,6 +21,7 @@
     "@react-navigation/material-bottom-tabs": "^5.2.12",
     "@react-navigation/native": "^5.6.1",
     "@react-navigation/stack": "^5.6.2",
+    "AsyncStorage": "^0.1.5",
     "feather-icons": "^4.28.0",
     "feather-icons-react": "^0.4.1",
     "jwt-decode": "^2.2.0",

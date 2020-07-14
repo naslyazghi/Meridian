@@ -32,7 +32,7 @@ const LoginScreen = ({navigation}) => {
     message: '',
   });
 
-  // const {logIn} = React.useContext(AuthContext);
+  const {logIn} = React.useContext(AuthContext);
 
   // email has to be atleast 4 charachters long
   const textInputChange = val => {
@@ -94,8 +94,8 @@ const LoginScreen = ({navigation}) => {
 
   // logIn
   const loginHandle = async (email, password) => {
-    //event.preventDefault();
-
+    
+    // Construct the Json body for the request
     const js = '{"email":"' + email + '","password":"' + password + '"}';
 
     // email or Password is empty
@@ -133,20 +133,26 @@ const LoginScreen = ({navigation}) => {
       }
       // User found
       else {
-        var user = {
-          firstName: res.firstName,
-          lastName: res.lastName,
-          id: res.id,
-        };
+        // Decode the token
         var jwt_decode = require('jwt-decode');
         var decoded = jwt_decode(res.token);
         //localStorage.setItem('user_data', JSON.stringify(user));
 
-        //setMessage('');
+        // Set the message
         setData({
           ...data,
           message: 'Login is successful',
         });
+
+        // Store the user Info
+        var user = {
+          id: decoded.id,
+          username: decoded.name,
+          email: decoded.email,
+          userToken: res.token,
+        };
+        
+
         // Show an alert box
         Alert.alert(
           'Meridian',
@@ -158,6 +164,9 @@ const LoginScreen = ({navigation}) => {
             decoded.email,
           +[{text: 'OK'}],
         );
+
+        logIn(user);
+
         return;
         // Direct the user to the main screen
         // window.location.href = '/cards';

@@ -3,6 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ExpensesLogScreen } from '../screens/ExpensesLogScreen';
 import Icon from 'react-native-ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
 const MainStack = createStackNavigator();
@@ -14,14 +15,14 @@ const ExpensesStackScreen = ({navigation}) => (
         options={{
           title: 'Meridian',
           headerLeft: () => (
-            <Icon style={styles.headerLeft} name='menu' size={35}
+            <Feather style={styles.headerLeft} name='menu' size={35}
               onPress = {() => navigation.openDrawer()}>
-            </Icon>
+            </Feather>
           ),
           headerRight: () => (
-            <Icon style={styles.headerRight} name='trending-up' size={35}
+            <Feather style={styles.headerRight} name='plus-circle' size={35}
               onPress = {() => navigation.openDrawer()}>
-            </Icon>        
+            </Feather>        
           ),
           headerStyle: {
             backgroundColor: '#009387',

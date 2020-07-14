@@ -21,7 +21,8 @@ import jwt_decode from 'jwt-decode';
 const BASE_URL = 'https://cop4331-test-2.herokuapp.com/';
 
 const RegisterScreen = ({navigation}) => {
-  //const {logIn} = React.useContext(AuthContext);
+  
+  const {logIn} = React.useContext(AuthContext);
 
   const [data, setData] = React.useState({
     email: '',
@@ -104,7 +105,7 @@ const RegisterScreen = ({navigation}) => {
 
   // Password has to be at least 8 charachters long
   const handlePasswordChange = val => {
-    if (val.trim().length >= 8) {
+    if (val.trim().length >= 6) {
       setData({
         ...data,
         password: val,
@@ -140,6 +141,7 @@ const RegisterScreen = ({navigation}) => {
     });
   };
 
+
   // Register
   const registerHandle = async (email, username, password, confirm_password) => {
     // email = "test@test.com";
@@ -153,6 +155,8 @@ const RegisterScreen = ({navigation}) => {
       email +
       '","password":"' +
       password +
+      '","password2":"' +
+      confirm_password +
       '"}';
 
     // email or Password is empty
@@ -188,7 +192,7 @@ const RegisterScreen = ({navigation}) => {
 
       // 3 - Processing the response
       // User successfully added to the database
-      if (res.name.length > 0) {
+      if (res.name === username) {
         var user = {
           firstName: res.firstName,
           lastName: res.lastName,
@@ -203,14 +207,16 @@ const RegisterScreen = ({navigation}) => {
         // Show an alert box
         Alert.alert(
           'Meridian Registration',
-          'User Succesfully Registred\nid: ' +
-            res._id +
-            '\nname: ' +
+          'User Succesfully Registred\nname: ' +
             res.name +
             '\nemail: ' +
-            res.email,
+            res.email +
+            '\npassword: ' +
+            res.password,
           +[{text: 'OK'}],
         );
+
+        navigation.navigate('LoginScreen');
         return;
         // TODO: Direct the user to the main screen
       }
@@ -311,7 +317,7 @@ const RegisterScreen = ({navigation}) => {
       {/*Show error messgae for a non valid Password*/}
       { data.isValidPassword ? null : 
         <Animatable.View animation="fadeInLeft" duration={500}>
-        <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
+        <Text style={styles.errorMsg}>Password must be 6 characters long.</Text>
         </Animatable.View>
       }
 
