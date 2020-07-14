@@ -23,11 +23,6 @@ const ExpensesStackScreen = ({navigation}) => (
               onPress = {() => navigation.openDrawer()}>
             </Icon>        
           ),
-          headerRight: () => (
-            <Icon style={styles.headerRight} name='trending-up' size={35}
-              onPress = {() => navigation.openDrawer()}>
-            </Icon>        
-          ),
           headerStyle: {
             backgroundColor: '#009387',
           },
