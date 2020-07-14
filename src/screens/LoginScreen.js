@@ -55,7 +55,7 @@ const LoginScreen = ({navigation}) => {
 
   // Password has to be at least 8 charachters long
   const handlePasswordChange = val => {
-    if (val.trim().length >= 8) {
+    if (val.trim().length >= 6) {
       setData({
         ...data,
         password: val,
@@ -148,7 +148,7 @@ const LoginScreen = ({navigation}) => {
         var user = {
           id: decoded.id,
           username: decoded.name,
-          email: decoded.email,
+          email: res.email,
           userToken: res.token,
         };
         
@@ -161,7 +161,7 @@ const LoginScreen = ({navigation}) => {
             '\nname: ' +
             decoded.name +
             '\nemail: ' +
-            decoded.email,
+            res.email,
           +[{text: 'OK'}],
         );
 
@@ -246,7 +246,7 @@ const LoginScreen = ({navigation}) => {
       {data.isValidPassword ? null : (
         <Animatable.View animation="fadeInLeft" duration={500}>
           <Text style={styles.errorMsg}>
-            Password must be 8 characters long.
+            Password must be 6 characters long.
           </Text>
         </Animatable.View>
       )}
