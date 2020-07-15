@@ -25,6 +25,7 @@
     "feather-icons": "^4.28.0",
     "feather-icons-react": "^0.4.1",
     "jwt-decode": "^2.2.0",
+    "lodash.clonedeep": "^4.5.0",
     "react": "16.11.0",
     "react-feather": "^2.0.8",
     "react-native": "0.62.2",

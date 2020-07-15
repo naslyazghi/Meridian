@@ -15,6 +15,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {lightTheme} from './themes/light';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {AboutScreen} from './screens/AboutScreen';
+import {AddGroup} from './screens/AddGroup';
 import {SettingsScreen} from './screens/SettingsScreen';
 import Icon from 'react-native-ionicons';
 import MainTabScreen from './screens/MainTabScreen';
@@ -176,6 +177,8 @@ const App = () => {
   }
 
   const user = null;
+  const token = loginState.userToken;
+  console.log('token = ' + loginState.userToken);
 
   return (
     <AuthContext.Provider value={authContext}>
@@ -183,11 +186,16 @@ const App = () => {
         {loginState.userToken !== null ? (
           <Drawer.Navigator
             drawerStyle={{backgroundColor: '#F7F7F7', width: 240}}
-            drawerContent={props => <DrawerContent {...props} />}>
-            <Drawer.Screen name="Main" component={MainTabScreen} />
+            drawerContent={props => <DrawerContent {...props} token={loginState.userToken} />}>
+            <Drawer.Screen
+              name="Main"
+              component={MainTabScreen}
+              initialParams={{token: loginState.userToken}}
+            />
             <Drawer.Screen name="Profile" component={ProfileScreen} />
             <Drawer.Screen name="Settings" component={SettingsScreen} />
             <Drawer.Screen name="About" component={AboutScreen} />
+            <Drawer.Screen name="AddGroup" component={AddGroup} />
           </Drawer.Navigator>
         ) : (
           <RootStackScreen />

@@ -1,177 +1,184 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
-import {Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch} from 'react-native-paper'
+import {
+  Avatar,
+  Title,
+  Caption,
+  Paragraph,
+  Drawer,
+  Text,
+  TouchableRipple,
+  Switch,
+} from 'react-native-paper';
 import Icon from 'react-native-ionicons';
 import {AuthContext} from '../contexts/AuthContext';
 import Feather from 'react-native-vector-icons/Feather';
 
-export function DrawerContent(props) {
-    const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-    const toggleTheme = () => {
-        setIsDarkTheme(!isDarkTheme);
-    }
+export function DrawerContent({props, token, navigation}) {
 
-    const {signOut} = React.useContext(AuthContext);
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
 
-    return(
-        <View style={{flex: 1}}>
-            <DrawerContentScrollView {...props}>
-                <View style={styles.drawerContent}>
+  const {signOut} = React.useContext(AuthContext);
 
-                    <View style={styles.userInfoSection}>
-                        <View style={{flexDirection: 'row', marginTop: 15}}>
-                            {/* <Avatar.Image
-                                source={{
-                                    uri:''
-                                }}
-                                size={50}
-                            /> */}
-                            <Feather
-                                name= "user"
-                                color={'#009387'}
-                                size={49}
-                            />
-                            <View style={{marginLeft:15, flexDirection: 'column'}}>
-                                <Title style={styles.title}>Nas Lyazghi</Title>
-                                <Caption style={styles.caption}>ID: 8225499</Caption>
-                            </View>
-                        </View>
-                        
-                        <View style={styles.row}>
-                            <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>6</Paragraph>
-                                <Caption style={styles.caption}>Groups</Caption>
-                            </View>
-                            <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>34</Paragraph>
-                                <Caption style={styles.caption}>Connections</Caption>
-                            </View>
-                        </View>
-                    </View>
+  // Decode the token
+  var jwt_decode = require('jwt-decode');
+  var decoded = jwt_decode(token);
 
+  // Create User
+  var user = {
+    id: decoded.id,
+    username: decoded.name,
+    email: decoded.email,
+  };
 
-                    <Drawer.Section style={styles.drawerSection}>
-                        <DrawerItem
-                            icon={({color, size}) => (
-                                <Feather
-                                    name= "home"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}    
-                            label="Groups"
-                            onPress={() => {props.navigation.navigate('Main')}}
-                        />
-                        <DrawerItem
-                            icon={({color, size}) => (
-                                <Feather
-                                    name= "smile"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}    
-                            label="Profile"
-                            onPress={() => {props.navigation.navigate('Profile')}}
-                        />
-                        <DrawerItem
-                            icon={({color, size}) => (
-                                <Feather
-                                    name= "settings"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}    
-                            label="Settings"
-                            onPress={() => {props.navigation.navigate('Settings')}}
-                        />
-                        <DrawerItem
-                            icon={({color, size}) => (
-                                <Feather
-                                    name= "code"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}    
-                            label="About"
-                            onPress={() => {props.navigation.navigate('About')}}
-                        />
-                    </Drawer.Section>
+  return (
+    <View style={{flex: 1}}>
+      <DrawerContentScrollView {...props}>
+        <View style={styles.drawerContent}>
+          <View style={styles.userInfoSection}>
+            <View style={{flexDirection: 'row', marginTop: 15}}>
+              <Feather name="user" color={'#009387'} size={49} />
+              <View style={{marginLeft: 2, flexDirection: 'column'}}>
+                <Title style={styles.title}>{user.username}</Title>
+                <Caption style={styles.caption}>{user.id}</Caption>
+              </View>
+            </View>
 
-                    <Drawer.Section title='Preferences'>
-                        <TouchableRipple onPress={() => {toggleTheme()}}>
-                            <View style={styles.preference}>
-                                <Text>Dark Mode</Text>
-                                <View pointerEvents="none">
-                                    <Switch value={isDarkTheme}/>
-                                </View>
-                            </View>
-                        </TouchableRipple>
-                    </Drawer.Section>
+            <View style={styles.row}>
+              <View style={styles.section}>
+                <Paragraph style={[styles.paragraph, styles.caption]}>
+                  6
+                </Paragraph>
+                <Caption style={styles.caption}>Groups</Caption>
+              </View>
+              <View style={styles.section}>
+                <Paragraph style={[styles.paragraph, styles.caption]}>
+                  34
+                </Paragraph>
+                <Caption style={styles.caption}>Connections</Caption>
+              </View>
+            </View>
+          </View>
+
+          <Drawer.Section style={styles.drawerSection}>
+            <DrawerItem
+              icon={({color, size}) => (
+                <Feather name="home" color={color} size={size} />
+              )}
+              label="Groups"
+              onPress={() => {
+                props.navigation.navigate('Main');
+              }}
+            />
+            <DrawerItem
+              icon={({color, size}) => (
+                <Feather name="smile" color={color} size={size} />
+              )}
+              label="Profile"
+              onPress={() => {
+                props.navigation.navigate('Profile');
+              }}
+            />
+            <DrawerItem
+              icon={({color, size}) => (
+                <Feather name="settings" color={color} size={size} />
+              )}
+              label="Settings"
+              onPress={() => {
+                props.navigation.navigate('Settings');
+              }}
+            />
+            <DrawerItem
+              icon={({color, size}) => (
+                <Feather name="code" color={color} size={size} />
+              )}
+              label="About"
+              onPress={() => {
+                props.navigation.navigate('About');
+              }}
+            />
+          </Drawer.Section>
+
+          <Drawer.Section title="Preferences">
+            <TouchableRipple
+              onPress={() => {
+                toggleTheme();
+              }}>
+              <View style={styles.preference}>
+                <Text>Dark Mode</Text>
+                <View pointerEvents="none">
+                  <Switch value={isDarkTheme} />
                 </View>
-            </DrawerContentScrollView>
-
-            <Drawer.Section style={styles.bottomDrawerSection}>
-                <DrawerItem
-                    icon={({color, size}) => (
-                        <Feather
-                            name= "log-out"
-                            color={color}
-                            size={size}
-                        />
-                    )}    
-                    label="Sign Out"
-                    onPress={() => {signOut()}}
-                />
-            </Drawer.Section>
+              </View>
+            </TouchableRipple>
+          </Drawer.Section>
         </View>
-    );
+      </DrawerContentScrollView>
+
+      <Drawer.Section style={styles.bottomDrawerSection}>
+        <DrawerItem
+          icon={({color, size}) => (
+            <Feather name="log-out" color={color} size={size} />
+          )}
+          label="Sign Out"
+          onPress={() => {
+            signOut();
+          }}
+        />
+      </Drawer.Section>
+    </View>
+  );
 }
 
 // STYLES
 const styles = StyleSheet.create({
-    drawerContent: {
-      flex: 1,
-    },
-    userInfoSection: {
-      paddingLeft: 20,
-    },
-    title: {
-      fontSize: 16,
-      marginTop: 0,
-      fontWeight: 'bold',
-    },
-    caption: {
-      fontSize: 14,
-      marginTop: 0,
-      lineHeight: 14,
-    },
-    row: {
-      marginTop: 20,
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    section: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginRight: 15,
-    },
-    paragraph: {
-      fontWeight: 'bold',
-      marginRight: 3,
-    },
-    drawerSection: {
-      marginTop: 15,
-    },
-    bottomDrawerSection: {
-        marginBottom: 15,
-        borderTopColor: '#f4f4f4',
-        borderTopWidth: 1
-    },
-    preference: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      paddingVertical: 12,
-      paddingHorizontal: 16,
-    },
-  });
+  drawerContent: {
+    flex: 1,
+  },
+  userInfoSection: {
+    paddingLeft: 3,
+  },
+  title: {
+    fontSize: 16,
+    marginTop: 0,
+    fontWeight: 'bold',
+  },
+  caption: {
+    fontSize: 13,
+    marginTop: 0,
+    lineHeight: 14,
+  },
+  row: {
+    marginTop: 20,
+    marginLeft: 7,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  section: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 20,
+  },
+  paragraph: {
+    fontWeight: 'bold',
+    marginRight: 4,
+  },
+  drawerSection: {
+    marginTop: 15,
+  },
+  bottomDrawerSection: {
+    marginBottom: 15,
+    borderTopColor: '#f4f4f4',
+    borderTopWidth: 1,
+  },
+  preference: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+});

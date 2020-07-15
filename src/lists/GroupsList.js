@@ -17,13 +17,13 @@ const GroupsList = ({ itemList }) => (
         <FlatList
                 data={itemList}
                 renderItem={({ item }) => <GroupsRow
-                    title={item.title}
-                    date={item.date}
-                    description={item.description}
-                    amount={item.amount}
-                    image_url={item.image_url}
+                    title={item.name}
+                    date={item.lastActivity}
+                    description={item.inviteCode}
+                    amount={item.balance}
+                    image_url={'https://homepages.cae.wisc.edu/~ece533/images/cat.png'}
                 />}
-            />
+        />
 
     </View>
 );
