@@ -2,7 +2,6 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {MainScreen} from '../screens/MainScreen';
-import Icon from 'react-native-ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import {View, Text, StyleSheet, Image} from 'react-native';
 

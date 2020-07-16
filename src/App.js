@@ -16,6 +16,7 @@ import {lightTheme} from './themes/light';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {AboutScreen} from './screens/AboutScreen';
 import {AddGroup} from './screens/AddGroup';
+import MemberstackScreen, {Members} from './stacks/MemberstackScreen';
 import {SettingsScreen} from './screens/SettingsScreen';
 import Icon from 'react-native-ionicons';
 import MainTabScreen from './screens/MainTabScreen';
@@ -196,6 +197,7 @@ const App = () => {
             <Drawer.Screen name="Settings" component={SettingsScreen} />
             <Drawer.Screen name="About" component={AboutScreen} />
             <Drawer.Screen name="AddGroup" component={AddGroup} />
+            <Drawer.Screen name="Members" component={MemberstackScreen} />
           </Drawer.Navigator>
         ) : (
           <RootStackScreen />

@@ -108,7 +108,7 @@ const LoginScreen = ({navigation}) => {
 
     try {
       // 1 - Respone variable from the API
-      const response = await fetch(BASE_URL + 'routes/api/users/login', {
+      const response = await fetch(BASE_URL + 'api/users/login', {
         method: 'POST',
         body: js,
         headers: {'Content-Type': 'application/json'},

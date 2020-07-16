@@ -180,7 +180,7 @@ const RegisterScreen = ({navigation}) => {
 
     try {
       // 1 - Respone variable from the API
-      const response = await fetch(BASE_URL + 'routes/api/users/register', {
+      const response = await fetch(BASE_URL + 'api/users/register', {
         method: 'POST',
         body: js,
         headers: {'Content-Type': 'application/json'},
@@ -399,58 +399,3 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-
-// import React from 'react';
-// import {View, StyleSheet, Text} from 'react-native';
-// import {Heading} from '../components/Heading';
-// import {Input} from '../components/InputEmail';
-// import {FilledButton} from '../components/FilledButton';
-// import {Error} from '../components/Error';
-// import {IconButton} from '../components/IconButton';
-// import { AuthContainer } from '../components/AuthContainer';
-
-// const RegisterScreen = ({navigation}) => {
-// //export function RegisterScreen({navigation}) {
-//   return (
-//   <AuthContainer>
-//     <Heading style={styles.title}>Register</Heading>
-//     <IconButton style={styles.closeIcon} name={'close-circle-outline'}
-//       onPress={() => {navigation.pop()}}/>
-//     <Error error={""}/>
-//     <Input style={styles.input} keyboardType={'email-address'} placeholder={"Email"} placeholderTextColor = {"white"}/>
-//     <Input style={styles.input} secureTextEntry placeholder={"Password"} placeholderTextColor = {"white"}/>
-//     <FilledButton title={'Register'} style={styles.loginButton} onPress={() => {}}/>
-//   </AuthContainer>
-//   );
-// }
-
-// export default RegisterScreen;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: 'center',
-//     padding: 16,
-//     paddingTop: 100,
-//     backgroundColor: '#1B1921',
-//     padding: 20,
-//   },
-
-//   title : {
-//     marginBottom: 32,
-//   },
-
-//   input: {
-//     marginVertical: 15,
-//   },
-
-//   loginButton: {
-//     marginVertical: 23,
-//   },
-
-//   closeIcon: {
-//     position: 'absolute',
-//     top: 40,
-//     right: 20.
-//   }
-// });

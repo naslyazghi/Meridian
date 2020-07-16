@@ -1,5 +1,32 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+
+
+const GroupsRow = ({ title, date, description, amount, image_url, onPress, style }) => (
+    <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
+        <Image source={{ uri: image_url }} style={styles.photo} />
+        <View style={styles.container_text}>
+            <Text style={styles.title}>
+                {title}
+            </Text>
+            <Text style={styles.date}>
+                {date}
+            </Text>            
+            <Text style={styles.description}>
+                {description}
+            </Text>
+        </View>
+        <Text style={styles.amount}>
+            {amount}
+        </Text>
+
+    </TouchableOpacity>
+);
+
+
+export default GroupsRow;
 
 const styles = StyleSheet.create({
     container: {
@@ -15,9 +42,6 @@ const styles = StyleSheet.create({
         marginBottom: 4,
         borderRadius: 2,
         backgroundColor: 'transparent',
-        borderColor: '#009387',
-        borderWidth: 0.5,
-
     },
     title: {
         fontSize: 16,
@@ -49,26 +73,3 @@ const styles = StyleSheet.create({
         width: 50,
     },
 });
-
-const GroupsRow = ({ title, date, description, amount, image_url }) => (
-    <View style={styles.container}>
-        <Image source={{ uri: image_url }} style={styles.photo} />
-        <View style={styles.container_text}>
-            <Text style={styles.title}>
-                {title}
-            </Text>
-            <Text style={styles.date}>
-                {date}
-            </Text>            
-            <Text style={styles.description}>
-                {description}
-            </Text>
-        </View>
-        <Text style={styles.amount}>
-            {amount}
-        </Text>
-
-    </View>
-);
-
-export default GroupsRow;
