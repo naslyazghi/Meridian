@@ -17,12 +17,14 @@ const ExpensesList = ({ itemList }) => (
         <FlatList
                 data={itemList}
                 renderItem={({ item }) => <ExpensesRow
-                    name={item.name}
-                    lastActivityDate={item.lastActivityDate}
-                    lastActivity={item.lastActivity}
-                    balance={item.balance}
-                    statusColor={item.statusColor}
-                    profileImage={item.profileImage}
+                    id={item._id}
+                    groupId={item.groupId}
+                    description={item.description}
+                    name={item.payer.name + " payed for " + item.billed.name}
+                    date={item.time}
+                    balance={'$' + item.amount}
+                    statusColor={'#FF871D'}
+                    profileImage={'trending-up'}
                 />}
             />
 

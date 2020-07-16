@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 
 const styles = StyleSheet.create({
     container: {
@@ -8,7 +9,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 3,
         marginLeft:5,
-        marginRight:5,
+        marginRight:10,
         marginTop: 0,
         marginBottom: 5,
         borderRadius: 2,
@@ -27,14 +28,14 @@ const styles = StyleSheet.create({
         marginLeft: 12,
         justifyContent: 'center',
     },
-    lastActivityDate: {
+    date: {
         fontSize: 11,
         color: 'white'
     },
-    lastActivity: {
-        fontSize: 11,
+    description: {
+        fontSize: 12,
         fontStyle: 'italic',
-        color: '#858486'
+        color: '#009387'
     },
     balance: {
         fontSize: 25,
@@ -46,19 +47,19 @@ const styles = StyleSheet.create({
     },
 });
 
-const ExpensesRow = ({ name, lastActivityDate, lastActivity, balance, statusColor, profileImage }) => (
+const ExpensesRow = ({ id, groupId, description, name, date, balance, statusColor, profileImage }) => (
     <View style={styles.container}>
         
-        <Icon style={styles.icon} name= { profileImage } color={statusColor} size={30} />
+        <Feather style={styles.icon} name= { profileImage } color={statusColor} size={30} />
         <View style={styles.container_text}>
             <Text style={styles.name}>
                 {name}
             </Text>
-            <Text style={styles.lastActivityDate}>
-                {lastActivityDate}
+            <Text style={styles.date}>
+                {date}
             </Text>            
-            <Text style={styles.lastActivity}>
-                {lastActivity}
+            <Text style={[styles.description, {color: statusColor}]}>
+                {description}
             </Text>
         </View>
         <Text style={[styles.balance, {color: statusColor}]}>

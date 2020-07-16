@@ -38,7 +38,7 @@ const GroupsList = ({navigation, itemList}) => {
         title={item.name}
         date={item.lastActivity}
         description={item.inviteCode}
-        amount={item.balance}
+        amount={'$' + item.balance}
         image_url={'https://homepages.cae.wisc.edu/~ece533/images/cat.png'}
         onPress={() => {setSelectedId(item.id)}}
         style={{borderColor, borderWidth}}
