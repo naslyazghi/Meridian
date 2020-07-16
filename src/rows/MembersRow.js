@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 
 const styles = StyleSheet.create({
     container: {
@@ -8,7 +9,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 2,
         marginLeft:5,
-        marginRight:5,
+        marginRight:10,
         marginTop: 1,
         marginBottom: 4,
         borderRadius: 2,
@@ -32,9 +33,9 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     lastActivity: {
-        fontSize: 11,
+        fontSize: 12,
         fontStyle: 'italic',
-        color: '#858486'
+        color: '#FF871D'
     },
     balance: {
         fontSize: 25,
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
 const MembersRow = ({ name, lastActivityDate, lastActivity, balance, statusColor, profileImage }) => (
     <View style={styles.container}>
         
-        <Icon style={styles.icon} name= { profileImage } color={statusColor} size={40} />
+        <Feather style={styles.icon} name= { profileImage } color={statusColor} size={40} />
         <View style={styles.container_text}>
             <Text style={styles.name}>
                 {name}

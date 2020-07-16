@@ -22,8 +22,8 @@ const MembersList = ({ itemList }) => (
                     lastActivityDate={'Last Activity Date'}
                     lastActivity={'Last Activity Description'}
                     balance={'$' + item.balance}
-                    statusColor={'#FF1DA2'}
-                    profileImage={"person"}
+                    statusColor={'#FF871D'}
+                    profileImage={"user-check"}
                 />}
             />
 

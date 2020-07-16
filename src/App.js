@@ -1,21 +1,14 @@
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
-import {
-  View,
-  Text,
-  Button,
-  TouchableOpacity,
-  Dimensions,
-  StyleSheet,
-  StatusBar,
-  Image,
-} from 'react-native';
+import {View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {lightTheme} from './themes/light';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {AboutScreen} from './screens/AboutScreen';
 import {AddGroup} from './screens/AddGroup';
+import {AddExpense} from './screens/AddExpense';
+import {SelectMembers} from './screens/SelectMembers';
 import MemberstackScreen, {Members} from './stacks/MemberstackScreen';
 import {SettingsScreen} from './screens/SettingsScreen';
 import Icon from 'react-native-ionicons';
@@ -33,12 +26,14 @@ import {
 } from 'react-native-paper';
 import {LogIn, Navigation} from 'react-feather';
 
-// // Create a root stack that will contain all the screens
-// const RootStack = createStackNavigator();
+global.userTokenConst = null;
 
-// // Create screen stacks
-// const LogInStack = createStackNavigator();
-// const RegisterStack = createStackNavigator();
+// Create a root stack that will contain all the screens
+const RootStack = createStackNavigator();
+
+// Create screen stacks
+const LogInStack = createStackNavigator();
+const RegisterStack = createStackNavigator();
 
 const AboutStack = createStackNavigator();
 
@@ -117,8 +112,6 @@ const App = () => {
     () => ({
       // Sign In
       logIn: async user => {
-        // setUserToken('fgkj');
-        // setIsLoading(false);
         const userToken = String(user.userToken);
         const userName = user.username;
 
@@ -132,8 +125,6 @@ const App = () => {
       },
       // Sign Out
       signOut: async () => {
-        //  setUserToken(null);
-        //  setIsLoading(false);
         try {
           await AsyncStorage.removeItem('userToken');
         } catch (e) {
@@ -142,10 +133,7 @@ const App = () => {
         dispatch({type: 'LOGOUT'});
       },
       // Sign Up
-      signUp: () => {
-        // setUserToken('fgkj');
-        // setIsLoading(false);
-      },
+      signUp: () => {},
       // Toggle Theme
       // toggleTheme: () => {
       //   setIsDarkTheme( isDarkTheme => !isDarkTheme );
@@ -177,8 +165,7 @@ const App = () => {
     );
   }
 
-  const user = null;
-  const token = loginState.userToken;
+  global.userTokenConst = loginState.userToken;
   console.log('token = ' + loginState.userToken);
 
   return (
@@ -187,17 +174,21 @@ const App = () => {
         {loginState.userToken !== null ? (
           <Drawer.Navigator
             drawerStyle={{backgroundColor: '#F7F7F7', width: 240}}
-            drawerContent={props => <DrawerContent {...props} token={loginState.userToken} />}>
+            drawerContent={props => <DrawerContent {...props} />}>
             <Drawer.Screen
               name="Main"
               component={MainTabScreen}
               initialParams={{token: loginState.userToken}}
             />
-            <Drawer.Screen name="Profile" component={ProfileScreen} />
+            <Drawer.Screen
+              name="Profile"
+              component={ProfileScreen}
+              initialParams={{token: loginState.userToken}}
+            />
             <Drawer.Screen name="Settings" component={SettingsScreen} />
             <Drawer.Screen name="About" component={AboutScreen} />
             <Drawer.Screen name="AddGroup" component={AddGroup} />
-            <Drawer.Screen name="Members" component={MemberstackScreen} />
+            <Drawer.Screen name="AddExpense" component={AddExpense} />
           </Drawer.Navigator>
         ) : (
           <RootStackScreen />

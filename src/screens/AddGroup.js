@@ -23,8 +23,7 @@ export function AddGroup({route, navigation}) {
     username: decoded.name,
     email: decoded.email,
   };
-  
-  
+
   // Declare variables ans states
   const [data, setData] = React.useState({
     check_groupInputChange: false,
@@ -99,18 +98,19 @@ export function AddGroup({route, navigation}) {
     }
   };
 
-  const addGroupHandle = async (groupName) => {
+  const addGroupHandle = async (groupName, description) => {
+    console.log('Add group => description: ' + description);
 
     // Construct the Json body for the request
-    const js = '{"name":"' + groupName + '"}';
+    const js ='{"name":"' + groupName + '","description":"' + description + '"}';
     console.log('js = ' + js);
-    
+
     try {
       // 1 - Respone variable from the API
       const response = await fetch(BASE_URL + user.id + '/createGroup', {
         method: 'POST',
         body: js,
-        headers: {'Content-Type': 'application/json', 'Authorization': token},
+        headers: {'Content-Type': 'application/json', Authorization: token},
       });
 
       // Parse the response
@@ -124,14 +124,15 @@ export function AddGroup({route, navigation}) {
       // Failed
       if (res.success !== true) {
         console.log('Adding Group failed');
-      } 
+      }
       // Success, Data found!!
       else {
-        console.log('Group added Successfuly => ' + res.group); 
-        Alert.alert('Add Group', res.group.name + ' added successfuly', [{text: 'OK'}]);
+        console.log('Group added Successfuly => ' + res.group);
+        Alert.alert('Add Group', res.group.name + ' added successfuly', [
+          {text: 'OK'},
+        ]);
         navigation.goBack();
       }
-
     } catch (e) {
       Alert.alert('Error', e.toString(), [{text: 'OK'}]);
     }

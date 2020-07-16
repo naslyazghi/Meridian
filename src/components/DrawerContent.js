@@ -15,7 +15,7 @@ import Icon from 'react-native-ionicons';
 import {AuthContext} from '../contexts/AuthContext';
 import Feather from 'react-native-vector-icons/Feather';
 
-export function DrawerContent({props, token, navigation}) {
+export function DrawerContent(props) {
 
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
   const toggleTheme = () => {
@@ -23,6 +23,9 @@ export function DrawerContent({props, token, navigation}) {
   };
 
   const {signOut} = React.useContext(AuthContext);
+
+  const token = global.userTokenConst;
+
 
   // Decode the token
   var jwt_decode = require('jwt-decode');

@@ -18,6 +18,7 @@ const MainTabScreen = ({route, navigation}) => {
       activeColor="white"
       barStyle={{backgroundColor: '#009387'}}
       shifting="true">
+      
       <Tab.Screen
         name="Main"
         component={MainStackScreen}
@@ -33,6 +34,7 @@ const MainTabScreen = ({route, navigation}) => {
       <Tab.Screen
         name="Members"
         component={MemberstackScreen}
+        initialParams={{token: token}}
         options={{
           tabBarLabel: 'Mmebers',
           tabBarIcon: ({color}) => (
@@ -44,6 +46,7 @@ const MainTabScreen = ({route, navigation}) => {
       <Tab.Screen
         name="Expense"
         component={ExpensesStackScreen}
+        initialParams={{token: token}}
         options={{
           tabBarLabel: 'Expense Log',
           tabBarIcon: ({color}) => (

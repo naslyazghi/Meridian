@@ -25,8 +25,8 @@ const GroupsList = ({navigation, itemList}) => {
   // TEMP
   const renderItem = ({item}) => {
     //const backgroundColor = item.id === selectedId ? '#1B1921' : '#1B1921';
-    const borderColor = item.id === selectedId ? '#42ffbd' : '#009387';
-    const borderWidth = item.id === selectedId ? 2 : 0.5;
+    const borderColor = item.id === selectedId ? '#FF871D' : '#009387';
+    const borderWidth = item.id === selectedId ? 1.5 : 0.2;
 
     global.groupId = selectedId;
     // console.log('Id selected = ' + selectedId);
@@ -37,7 +37,7 @@ const GroupsList = ({navigation, itemList}) => {
         id={item.id}
         title={item.name}
         date={item.lastActivity}
-        description={item.inviteCode}
+        description={item.description}
         amount={'$' + item.balance}
         image_url={'https://homepages.cae.wisc.edu/~ece533/images/cat.png'}
         onPress={() => {setSelectedId(item.id)}}
