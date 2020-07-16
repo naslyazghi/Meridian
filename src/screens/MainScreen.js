@@ -7,6 +7,8 @@ import jwt_decode from 'jwt-decode';
 import cloneDeep from 'lodash/cloneDeep';
 const BASE_URL = 'https://cop4331-test-2.herokuapp.com/draftapi/user/';
 
+global.userId = null;
+
 export function MainScreen({route, navigation}) {
   // Set the groups variable
   const [groups, setGroups] = React.useState(null);
@@ -24,6 +26,9 @@ export function MainScreen({route, navigation}) {
     username: decoded.name,
     email: decoded.email,
   };
+
+  global.userId = user.id;
+  global.token = token;
 
   // Retrieve groups
   const handleGroup = async () => {
@@ -60,7 +65,7 @@ export function MainScreen({route, navigation}) {
 
   handleGroup();
 
-  console.log('--- data = ' + groups);
+  //console.log('--- data = ' + groups);
 
   return (
     <View style={styles.container}>

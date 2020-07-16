@@ -17,12 +17,13 @@ const MembersList = ({ itemList }) => (
         <FlatList
                 data={itemList}
                 renderItem={({ item }) => <MembersRow
+                    id={item.id}
                     name={item.name}
-                    lastActivityDate={item.lastActivityDate}
-                    lastActivity={item.lastActivity}
+                    lastActivityDate={'Last Activity Date'}
+                    lastActivity={'Last Activity Description'}
                     balance={item.balance}
-                    statusColor={item.statusColor}
-                    profileImage={item.profileImage}
+                    statusColor={'#FF1DA2'}
+                    profileImage={"person"}
                 />}
             />
 
