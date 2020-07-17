@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import MembersList from '../lists/MembersList';
 const BASE_URL = 'https://cop4331-test-2.herokuapp.com/draftapi/group/';
+global.members = null;
 
 export function MembersScreen(navigation) {
   // console.log('Members Screen');
@@ -58,6 +59,7 @@ export function MembersScreen(navigation) {
           //setGroups(cloneDeep(res.groups));
           //Alert.alert('Success', 'Data Found!!', [{text: 'OK'}]);
           setMembers(res.members);
+          global.members = res.members;
           //console.log('Inside Members Screen => ' + members);
         }
       } catch (e) {

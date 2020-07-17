@@ -1,19 +1,16 @@
-import React from 'react';
-import {View, StyleSheet, Text, TextInput, Alert} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, Text, TextInput, Alert, Picker} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {FilledButton} from '../components/FilledButton';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import * as Animatable from 'react-native-animatable';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import MultiSelect from 'react-native-multiple-select';
-const BASE_URL = 'https://cop4331-test-2.herokuapp.com/draftapi/user/';
-
-
+const BASE_URL = 'https://cop4331-test-2.herokuapp.com/draftapi/group/';
 
 export function AddExpense({route, navigation}) {
-
   //const Data;
   const {token} = route.params;
   console.log('Token in Main Screen: ' + token);
@@ -28,6 +25,25 @@ export function AddExpense({route, navigation}) {
     username: decoded.name,
     email: decoded.email,
   };
+
+  const members = global.members;
+
+  console.log('User ID = ' + user.id);
+  console.log('Group ID = ' + global.groupId);
+  console.log('Mmebers: ');
+  console.log(members);
+
+  const [selectedMember, setSelectedMember] = useState('');
+  const [userValues, setUserValues] = useState(members);
+
+  console.log('UserValues are => ');
+  console.log(userValues);
+
+  let myUsers = userValues.map((myValue, myIndex) => {
+    console.log('myValue: ' + myValue.name);
+
+    return <Picker.Item label={myValue.name} value={myValue.id} key={myIndex} />;
+  });
 
   // Declare variables ans states
   const [data, setData] = React.useState({
@@ -103,47 +119,70 @@ export function AddExpense({route, navigation}) {
     }
   };
 
-  //   const addGroupHandle = async (amount, description) => {
-  //     console.log('Add group => description: ' + description);
+  const addGroupHandle = async (amount, description, selectedMember) => {
+    console.log('Add Expense => description: ' + description);
+    console.log('Add Expense => selectedMember: ' + selectedMember);
 
-  //     // Construct the Json body for the request
-  //     const js ='{"name":"' + amount + '","description":"' + description + '"}';
-  //     console.log('js = ' + js);
+    if (amount === null)
+    {
+      Alert.alert('Error', 'Please add an amount.', [
+        {text: 'OK'},
+      ]);
+      return;
+    }
 
-  //     try {
-  //       // 1 - Respone variable from the API
-  //       const response = await fetch(BASE_URL + user.id + '/createGroup', {
-  //         method: 'POST',
-  //         body: js,
-  //         headers: {'Content-Type': 'application/json', Authorization: token},
-  //       });
+    if (amount < 0)
+    {
+      Alert.alert('Error', 'Amount must be positive.', [
+        {text: 'OK'},
+      ]);
+      return;
+    }
 
-  //       // Parse the response
-  //       var txt = await response.text();
-  //       console.log('ADD GROUP, txt = ' + txt);
+    if (amount == 0)
+    {
+      Alert.alert('Error', "Amount can't be zero.", [
+        {text: 'OK'},
+      ]);
+      return;
+    }
 
-  //       var res = JSON.parse(txt);
-  //       console.log('ADD GROUP, res = ' + res.success);
+    // Construct the Json body for the request
+    const js = '{"payer":"' + user.id + '","billed":"' + selectedMember + '","amount":"' + amount + '","description":"' +  description + '"}';
+    console.log('js = ' + js);
 
-  //       // Process the response
-  //       // Failed
-  //       if (res.success !== true) {
-  //         console.log('Adding Group failed');
-  //       }
-  //       // Success, Data found!!
-  //       else {
-  //         console.log('Group added Successfuly => ' + res.group);
-  //         Alert.alert('Add Group', res.group.name + ' added successfuly', [
-  //           {text: 'OK'},
-  //         ]);
-  //         navigation.goBack();
-  //       }
-  //     } catch (e) {
-  //       Alert.alert('Error', e.toString(), [{text: 'OK'}]);
-  //     }
-  //   };
+    try {
+      // 1 - Respone variable from the API
+      const response = await fetch(BASE_URL + global.groupId + '/recordExpense', {
+        method: 'POST',
+        body: js,
+        headers: {'Content-Type': 'application/json', Authorization: token},
+      });
 
+      // Parse the response
+      var txt = await response.text();
+      console.log('ADD Expense, txt = ' + txt);
 
+      var res = JSON.parse(txt);
+      console.log('ADD Expense, res = ' + res.success);
+
+      // Process the response
+      // Failed
+      if (res.success !== true) {
+        console.log('Adding Expense failed');
+      }
+      // Success, Data found!!
+      else {
+        console.log('Expense added Successfuly');
+        Alert.alert('Success', 'An amount of $' + amount + ' has been recorded', [
+          {text: 'OK'},
+        ]);
+        navigation.goBack();
+      }
+    } catch (e) {
+      Alert.alert('Error', e.toString(), [{text: 'OK'}]);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -160,12 +199,19 @@ export function AddExpense({route, navigation}) {
 
       {/*Title*/}
       <Text style={styles.title}>Add Expense</Text>
-      
-      {/*Select Members*/}
-      <TouchableOpacity style={styles.addMemberButton} onPress={() => {navigation.navigate('SelectMembers')}}>
-        <Text style={styles.addMembers}>Select Members</Text>
-      </TouchableOpacity>
 
+      {/*Select Member 1*/}
+      <View style={styles.memberRow}>
+        <Text style={styles.member}>Billed Member</Text>
+        <View style={styles.addMembers}>
+          <Picker
+            selectedValue={selectedMember}
+            style={styles.addMemberPicker}
+            onValueChange={value => setSelectedMember(value)}>
+            {myUsers}
+          </Picker>
+        </View>
+      </View>
 
       {/*Amount*/}
       <View style={styles.action}>
@@ -219,38 +265,52 @@ export function AddExpense({route, navigation}) {
         title={'Add'}
         style={styles.loginButton}
         onPress={() => {
-          addGroupHandle(data.amount, data.description);
+          addGroupHandle(data.amount, data.description, selectedMember);
         }}
       />
     </View>
   );
 }
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: 150,
+    paddingTop: 130,
     backgroundColor: '#1B1921',
     padding: 30,
   },
 
-  addMembers: {
-    fontSize: 16,
-    color: 'white',
-    padding: 7,
-  },
-
-  addMemberButton: {
-    marginTop: 15,
-    borderColor:'#009387',
-    borderWidth: 1,
-  },
-
   title: {
-    marginBottom: 30,
+    marginBottom: 100,
     fontSize: 27,
     color: 'white',
+  },
+
+  memberRow: {
+    marginBottom: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  addMembers: {
+    borderColor: 'white',
+    borderWidth: 0.7,
+    borderColor: '#009387',
+  },
+
+  addMemberPicker: {
+    height: 50,
+    width: 200,
+    color: 'white',
+    padding: 0,
+  },
+
+  member: {
+    color: 'white',
+    fontSize: 17,
+    marginRight: 40,
   },
 
   loginButton: {
@@ -275,7 +335,7 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     position: 'absolute',
-    top: 60,
+    top: 40,
     right: 20,
   },
 });

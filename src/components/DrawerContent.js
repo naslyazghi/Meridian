@@ -47,7 +47,7 @@ export function DrawerContent(props) {
               <Feather name="user" color={'#009387'} size={49} />
               <View style={{marginLeft: 2, flexDirection: 'column'}}>
                 <Title style={styles.title}>{user.username}</Title>
-                <Caption style={styles.caption}>{user.id}</Caption>
+                <Caption style={styles.caption}>{user.email}</Caption>
               </View>
             </View>
 
