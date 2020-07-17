@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Feather from 'react-native-vector-icons/Feather';
 
-export function AboutScreen(navigation){
+export function AboutScreen({route, navigation}){
   return (
     <View style={styles.container}>
     <Feather
