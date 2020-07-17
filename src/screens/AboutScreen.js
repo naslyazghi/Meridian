@@ -16,39 +16,40 @@ export function AboutScreen(navigation){
         navigation.goBack();
       }}
     />
-      <Text style={styles.descriptionText}>Meridian is a money management application that
-                                 allows users to create, read from, update, and
-                                 delete groups that contain other users that have
-                                 a financial relationship to the original user.
-                                 Meridian allows users to keep track of
-                                 finances for all kinds of events. From vacations
-                                 to dinners, from loans to everyday expenses, this
-                                 application provides a platform to conveniently
-                                 manage your finances.
-                                 </Text>
+      <Text style={styles.descriptionText}>
+        Meridian is a money management application that
+        allows users to create, read from, update, and
+        delete groups that contain other users that have
+        a financial relationship to the original user.
+        Meridian allows users to keep track of
+        finances for all kinds of events. From vacations
+        to dinners, from loans to everyday expenses, this
+        application provides a platform to conveniently
+        manage your finances.
+      </Text>
+      
+      <Text style={styles.devText}>
+        Developers:
+      </Text>
 
-                                 <Text style={styles.devText}>
-                                 Developers:
-                                 </Text>
-
-                                 <Text style={styles.creditsText}>
-                                 Nas Lyazghi
-                                 </Text>
-                                 <Text style={styles.creditsText}>
-                                 Jeffrey Ramos
-                                 </Text>
-                                 <Text style={styles.creditsText}>
-                                 Ryan Gordon
-                                 </Text>
-                                 <Text style={styles.creditsText}>
-                                 Erik Bates
-                                 </Text>
-                                 <Text style={styles.creditsText}>
-                                 Austin Traub
-                                 </Text>
-                                 <Text style={styles.creditsText}>
-                                 Moises "David" Cortes Lugo
-                                 </Text>
+      <Text style={styles.creditsText}>
+        Nas Lyazghi
+      </Text>
+      <Text style={styles.creditsText}>
+        Jeffrey Ramos
+      </Text>
+      <Text style={styles.creditsText}>
+        Ryan Gordon
+      </Text>
+      <Text style={styles.creditsText}>
+        Erik Bates
+      </Text>
+      <Text style={styles.creditsText}>
+        Austin Traub
+      </Text>
+      <Text style={styles.creditsText}>
+        Moises "David" Cortes Lugo
+      </Text>
     </View>
   );
 }
