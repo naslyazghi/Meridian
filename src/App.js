@@ -25,6 +25,7 @@ import {
   DarkTheme as PaperDarkTheme,
 } from 'react-native-paper';
 import {LogIn, Navigation} from 'react-feather';
+const jwt_decode = require('jwt-decode');
 
 global.userTokenConst = null;
 
@@ -61,31 +62,55 @@ const Drawer = createDrawerNavigator();
 //   </AboutStack.Navigator>
 // );
 
+// There's probably a better way to do this
+let urlToBeOpened;
+let globalUserToken;
+ 
 const useMount = func => useEffect(() => func(), []);
+const joinGroup = async (groupId, inviteCode, userToken) => {
+  const decoded = jwt_decode(userToken);
+  const res = await fetch(`https://cop4331-test-2.herokuapp.com/draftapi/group/${groupId}/join/${inviteCode}`, {
+    method: 'POST',
+    body: JSON.stringify({userId: decoded.id}),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': userToken
+  }});    
+}
+const handleInvite = async (url, userToken) => {
+  const res = url.match(/https:\/\/cop4331-test-2\.herokuapp\.com\/group\/([0-9A-f]+)\/join\/([0-9A-z]+)/);
+  if (res == null) {
+    console.log("Invalid invite code");
+    return;
+  }
+  const [entireMatch, groupId, inviteCode] = res;
+  const fetchRes = await fetch(`https://cop4331-test-2.herokuapp.com/draftapi/group/${groupId}/checkInvite/${inviteCode}`, {headers: {Authorization: userToken}});
+  const data = await fetchRes.json();
+  if (data.error) {
+    Alert.alert('Invalid group invite!', '', [
+      {text: 'OK'},
+    ]);
+    return;
+  } 
+  Alert.alert('Group invite debug', 'Group: '+data.group.name, [
+    {text: 'Cancel', style: 'cancel'},
+    {text: 'Join', onPress: () => {
+        joinGroup(groupId, inviteCode, userToken);
+    }},
+  ]);
+}
 const App = () => {
   // const [isLoading, setIsLoading] = React.useState(true);
   // const [userToken, setUserToken] = React.useState(null);
-  const handleURL = (input) => {
-    if (input == null)
-      return;
-    const res = input.match(/https:\/\/cop4331-test-2\.herokuapp\.com\/group\/([0-9A-f]+)\/join\/([0-9A-f]+)/);
-    if (res == null) {
-      console.log("Invalid invite code");
-      return;
-    }
-	const [entireMatch, group, inviteCode] = res;
-    console.log("Group invite debug"+group+" | "+inviteCode);
-    Alert.alert('Group invite debug', 'Group: '+group+" Invite: "+inviteCode, [
-        {text: 'OK'},
-      ]);
-  }
+
   useMount(() => {
     Linking.getInitialURL().then(m => {
-      handleURL(m);
+        urlToBeOpened = m;
     });
     Linking.addEventListener("url", (m) => {
-      let input = m.url;
-      handleURL(input);
+      if (globalUserToken == null)
+          return;
+      handleInvite(m.url, globalUserToken);
     });
   });
 
@@ -99,6 +124,7 @@ const App = () => {
   const loginReducer = (prevState, action) => {
     switch (action.type) {
       case 'RETRIEVE_TOKEN':
+        globalUserToken = action.token;
         return {
           ...prevState,
           userToken: action.token,
@@ -176,6 +202,12 @@ const App = () => {
         userToken = await AsyncStorage.getItem('userToken');
       } catch (e) {
         console.log(e);
+      }
+      globalUserToken = userToken;
+      if (urlToBeOpened != null && userToken != null) {
+          const url = urlToBeOpened;
+          urlToBeOpened = null;
+          handleInvite(url, userToken);
       }
       // console.log('user token: ', userToken);
       dispatch({type: 'RETRIEVE_TOKEN', token: userToken});
