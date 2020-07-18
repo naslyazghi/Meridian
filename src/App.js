@@ -75,7 +75,8 @@ const joinGroup = async (groupId, inviteCode, userToken) => {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': userToken
-  }});    
+  }});
+  console.log("Join response", res.status);  
 }
 const handleInvite = async (url, userToken) => {
   const res = url.match(/https:\/\/cop4331-test-2\.herokuapp\.com\/group\/([0-9A-f]+)\/join\/([0-9A-z]+)/);
@@ -92,7 +93,7 @@ const handleInvite = async (url, userToken) => {
     ]);
     return;
   } 
-  Alert.alert('Group invite debug', 'Group: '+data.group.name, [
+  Alert.alert('Join '+data.group.name+'?', '', [
     {text: 'Cancel', style: 'cancel'},
     {text: 'Join', onPress: () => {
         joinGroup(groupId, inviteCode, userToken);
