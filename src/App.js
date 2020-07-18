@@ -18,7 +18,7 @@ import {ProfileScreen} from './screens/ProfileScreen';
 import RootStackScreen from './screens/RootStackScreen';
 import {AuthContext} from './contexts/AuthContext';
 import {ActivityIndicator} from 'react-native-paper';
-import {AsyncStorage} from 'react-native';
+import {AsyncStorage, Linking, Alert} from 'react-native';
 import {
   Provider as PaperProvider,
   DefaultTheme as PaperDefaultTheme,
@@ -61,9 +61,34 @@ const Drawer = createDrawerNavigator();
 //   </AboutStack.Navigator>
 // );
 
+const useMount = func => useEffect(() => func(), []);
 const App = () => {
   // const [isLoading, setIsLoading] = React.useState(true);
   // const [userToken, setUserToken] = React.useState(null);
+  const handleURL = (input) => {
+    if (input == null)
+      return;
+    const res = input.match(/https:\/\/cop4331-test-2\.herokuapp\.com\/group\/([0-9A-f]+)\/join\/([0-9A-f]+)/);
+    if (res == null) {
+      console.log("Invalid invite code");
+      return;
+    }
+	const [entireMatch, group, inviteCode] = res;
+    console.log("Group invite debug"+group+" | "+inviteCode);
+    Alert.alert('Group invite debug', 'Group: '+group+" Invite: "+inviteCode, [
+        {text: 'OK'},
+      ]);
+  }
+  useMount(() => {
+    Linking.getInitialURL().then(m => {
+      handleURL(m);
+    });
+    Linking.addEventListener("url", (m) => {
+      let input = m.url;
+      handleURL(input);
+    });
+  });
+
 
   const initialLoginState = {
     isLoading: true,
