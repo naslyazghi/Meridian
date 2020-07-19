@@ -36,7 +36,7 @@ const MainTabScreen = ({route, navigation}) => {
         component={MemberstackScreen}
         initialParams={{token: token}}
         options={{
-          tabBarLabel: 'Mmebers',
+          tabBarLabel: 'Members',
           tabBarIcon: ({color}) => (
             <Feather name="users" color={color} size={26} />
           ),
