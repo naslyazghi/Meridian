@@ -23,7 +23,7 @@ const ExpensesList = ({ itemList }) => (
                     name={item.payer.name + " payed for " + item.billed.name}
                     date={item.time}
                     balance={'$' + item.amount}
-                    statusColor={'#FF871D'}
+                    statusColor={'#009387'}
                     profileImage={'trending-up'}
                 />}
             />

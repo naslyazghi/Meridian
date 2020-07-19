@@ -25,8 +25,8 @@ const GroupsList = ({navigation, itemList}) => {
   // TEMP
   const renderItem = ({item}) => {
     //const backgroundColor = item.id === selectedId ? '#1B1921' : '#1B1921';
-    const borderColor = item.id === selectedId ? '#FF871D' : '#009387';
-    const borderWidth = item.id === selectedId ? 1.5 : 0.2;
+    const borderColor = item.id === selectedId ? '#009387' : '#009387';
+    const borderWidth = item.id === selectedId ? 1.7 : 0.2;
 
     global.groupId = selectedId;
     // console.log('Id selected = ' + selectedId);

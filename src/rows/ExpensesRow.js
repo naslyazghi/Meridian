@@ -56,7 +56,7 @@ const ExpensesRow = ({ id, groupId, description, name, date, balance, statusColo
                 {name}
             </Text>
             <Text style={styles.date}>
-                {date}
+                {date.substring(0, date.indexOf('T'))}
             </Text>            
             <Text style={[styles.description, {color: statusColor}]}>
                 {description}

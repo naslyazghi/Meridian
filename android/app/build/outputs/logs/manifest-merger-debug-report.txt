@@ -1,10 +1,10 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-27:12
-INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-27:12
-INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-27:12
-INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-27:12
-MERGED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-27:12
+ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-36:12
+INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-36:12
+INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-36:12
+INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-36:12
+MERGED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-36:12
 MERGED from [com.facebook.flipper:flipper:0.33.1] C:\Users\NAS\.gradle\caches\transforms-2\files-2.1\9b7d345744deb41c2f8740e2422127c3\jetified-flipper-0.33.1\AndroidManifest.xml:8:1-18:12
 MERGED from [com.facebook.flipper:flipper-network-plugin:0.33.1] C:\Users\NAS\.gradle\caches\transforms-2\files-2.1\fa9d249d56579007dba70f8ee4dd5b3f\flipper-network-plugin-0.33.1\AndroidManifest.xml:8:1-15:12
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.33.1] C:\Users\NAS\.gradle\caches\transforms-2\files-2.1\5a1065d4748ae359265a740b2069d44b\flipper-fresco-plugin-0.33.1\AndroidManifest.xml:8:1-15:12
@@ -67,13 +67,13 @@ INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\debug\AndroidManifest
 		INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\debug\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-27:12
+		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-36:12
 		INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\debug\AndroidManifest.xml
 	xmlns:tools
 		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\debug\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-27:12
+		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:1-36:12
 		INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\debug\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:1:11-69
@@ -84,9 +84,9 @@ MERGED from [com.facebook.flipper:flipper:0.33.1] C:\Users\NAS\.gradle\caches\tr
 	android:name
 		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:4:22-64
 application
-ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:6:5-25:19
-MERGED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:6:5-25:19
-MERGED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:6:5-25:19
+ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:6:5-34:19
+MERGED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:6:5-34:19
+MERGED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:6:5-34:19
 MERGED from [com.facebook.react:react-native:0.62.2] C:\Users\NAS\.gradle\caches\transforms-2\files-2.1\45d897518ec766365282c2f6ad8b74e2\jetified-react-native-0.62.2\AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.62.2] C:\Users\NAS\.gradle\caches\transforms-2\files-2.1\45d897518ec766365282c2f6ad8b74e2\jetified-react-native-0.62.2\AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.soloader:soloader:0.8.2] C:\Users\NAS\.gradle\caches\transforms-2\files-2.1\a682a4f61b53a5eb0b34ff17728f4b20\soloader-0.8.2\AndroidManifest.xml:11:5-20
@@ -126,7 +126,7 @@ MERGED from [com.facebook.soloader:annotation:0.8.2] C:\Users\NAS\.gradle\caches
 		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:7:7-38
 		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:7:7-38
 activity#com.ourtrip.MainActivity
-ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:13:7-23:18
+ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:13:7-32:18
 	android:label
 		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:15:9-41
 	android:launchMode
@@ -147,10 +147,34 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:21:13-73
 	android:name
 		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:21:23-70
-activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:24:7-84
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:cop4331-test-2.herokuapp.com+data:pathPrefix:/+data:scheme:https
+ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:23:11-31:27
+	android:label
+		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:23:26-47
+action#android.intent.action.VIEW
+ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:24:11-63
 	android:name
-		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:24:17-81
+		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:24:19-60
+category#android.intent.category.DEFAULT
+ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:25:11-70
+	android:name
+		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:25:21-67
+category#android.intent.category.BROWSABLE
+ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:26:11-72
+	android:name
+		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:26:21-69
+data
+ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:28:11-30:40
+	android:host
+		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:29:15-58
+	android:scheme
+		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:28:17-39
+	android:pathPrefix
+		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:30:15-37
+activity#com.facebook.react.devsupport.DevSettingsActivity
+ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:33:7-84
+	android:name
+		ADDED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml:33:17-81
 uses-sdk
 INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\NAS\Desktop\OurTrip\android\app\src\main\AndroidManifest.xml

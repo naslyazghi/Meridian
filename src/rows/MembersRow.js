@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     lastActivity: {
         fontSize: 12,
         fontStyle: 'italic',
-        color: '#FF871D'
+        color: '#009387'
     },
     balance: {
         fontSize: 25,
