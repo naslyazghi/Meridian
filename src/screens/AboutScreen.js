@@ -21,13 +21,17 @@ export function AboutScreen({route, navigation}){
         allows users to create, read from, update, and
         delete groups that contain other users that have
         a financial relationship to the original user.
+        </Text>
+        <Text style = {styles.descriptionText}>
         Meridian allows users to keep track of
-        finances for all kinds of events. From vacations
-        to dinners, from loans to everyday expenses, this
+        finances for all kinds of events.
+        </Text>
+        <Text style = {styles.descriptionText}>
+        From vacations to dinners, from loans to everyday expenses, this
         application provides a platform to conveniently
         manage your finances.
       </Text>
-      
+
       <Text style={styles.devText}>
         Developers:
       </Text>
@@ -57,16 +61,18 @@ export function AboutScreen({route, navigation}){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60
+    paddingTop: 60,
   },
 
   descriptionText: {
     fontSize: 20,
     color: 'white',
+    paddingBottom: 10,
+    paddingLeft: 7
   },
 
   devText: {
-    paddingTop: 315,
+    paddingTop: 215,
     fontSize: 25,
     color: 'white'
   },
