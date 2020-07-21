@@ -36,7 +36,7 @@ const LoginScreen = ({navigation}) => {
 
   // email has to be atleast 4 charachters long
   const textInputChange = val => {
-    if (val.trim().length >= 4) {
+    if (val.trim().length >= 8) {
       setData({
         ...data,
         email: val,
@@ -79,7 +79,7 @@ const LoginScreen = ({navigation}) => {
   };
 
   const handleValidUser = val => {
-    if (val.trim().length >= 4) {
+    if (val.trim().length >= 8) {
       setData({
         ...data,
         isValidUser: true,
@@ -215,7 +215,7 @@ const LoginScreen = ({navigation}) => {
       {/*Show error messgae for a non valid email*/}
       {data.isValidUser ? null : (
         <Animatable.View animation="fadeInLeft" duration={500}>
-          <Text style={styles.errorMsg}>email must be 4 characters long.</Text>
+          <Text style={styles.errorMsg}>email must be 8 characters long.</Text>
         </Animatable.View>
       )}
 

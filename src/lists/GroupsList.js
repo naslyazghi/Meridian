@@ -20,7 +20,10 @@ import {useNavigation} from '@react-navigation/native';
 global.groupId = null;
 
 const GroupsList = ({navigation, itemList}) => {
+
+  //console.log(itemList);
   const [selectedId, setSelectedId] = React.useState(null);
+
 
   // TEMP
   const renderItem = ({item}) => {

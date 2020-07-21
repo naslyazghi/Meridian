@@ -30,20 +30,26 @@ export function AddExpense({route, navigation}) {
 
   console.log('User ID = ' + user.id);
   console.log('Group ID = ' + global.groupId);
-  console.log('Mmebers: ');
+  console.log('Members: ');
   console.log(members);
 
   const [selectedMember, setSelectedMember] = useState('');
-  const [userValues, setUserValues] = useState(members);
+  const [userValues] = useState(members);
 
   console.log('UserValues are => ');
   console.log(userValues);
 
-  let myUsers = userValues.map((myValue, myIndex) => {
-    console.log('myValue: ' + myValue.name);
+  let myUsers;
 
-    return <Picker.Item label={myValue.name} value={myValue.id} key={myIndex} />;
-  });
+  // If no group is selected, we do not attempt to work with the null value that userValues contains.
+  if (userValues !== null)
+  {
+    myUsers = userValues.map((myValue, myIndex) => {
+      console.log('myValue: ' + myValue.name);
+
+      return <Picker.Item label={myValue.name} value={myValue.id} key={myIndex} />;
+    });
+  }
 
   // Declare variables ans states
   const [data, setData] = React.useState({
@@ -56,7 +62,7 @@ export function AddExpense({route, navigation}) {
   });
 
   const amountInputChange = val => {
-    if (val.trim().length <= 7 && val.trim().length >= 1) {
+    if (val.trim().length <= 5 && val.trim().length >= 1) {
       setData({
         ...data,
         amount: val,
@@ -74,7 +80,7 @@ export function AddExpense({route, navigation}) {
   };
 
   const descriptionInputChange = val => {
-    if (val.trim().length >= 10) {
+    if (val.trim().length >= 3) {
       setData({
         ...data,
         description: val,
@@ -92,7 +98,7 @@ export function AddExpense({route, navigation}) {
   };
 
   const handleValidAmount = val => {
-    if (val.trim().length <= 7 && val.trim().length >= 1) {
+    if (val.trim().length <= 5 && val.trim().length >= 1) {
       setData({
         ...data,
         isValidAmount: true,
@@ -106,7 +112,7 @@ export function AddExpense({route, navigation}) {
   };
 
   const handleValidDescription = val => {
-    if (val.trim().length >= 10) {
+    if (val.trim().length >= 3) {
       setData({
         ...data,
         isValidDescription: true,
@@ -148,7 +154,7 @@ export function AddExpense({route, navigation}) {
     }
 
     // Construct the Json body for the request
-    const js = '{"payer":"' + user.id + '","billed":"' + selectedMember + '","amount":"' + amount + '","description":"' +  description + '"}';
+    const js = '{"payer":"' + user.id + '","billed":"' + selectedMember + '","amount":' + parseInt(amount) + ',"description":"' +  description + '"}';
     console.log('js = ' + js);
 
     try {
@@ -164,12 +170,15 @@ export function AddExpense({route, navigation}) {
       console.log('ADD Expense, txt = ' + txt);
 
       var res = JSON.parse(txt);
-      console.log('ADD Expense, res = ' + res.success);
+      console.log('ADD Expense, res = ' + res.error);
 
       // Process the response
       // Failed
-      if (res.success !== true) {
+      if (res.error !== undefined) {
         console.log('Adding Expense failed');
+        Alert.alert('Error', res.error, [
+          {text: 'OK'},
+        ]);
       }
       // Success, Data found!!
       else {
@@ -184,9 +193,101 @@ export function AddExpense({route, navigation}) {
     }
   };
 
-  return (
-    <View style={styles.container}>
-      {/*Go Back*/}
+  // If a group was selected, allow user to add expenses to the selected group.
+  if (global.groupId !== null)
+  {
+    return (
+      <View style={styles.container}>
+        {/*Go Back*/}
+        <Feather
+          style={styles.closeIcon}
+          name={'x-circle'}
+          color="#009387"
+          size={30}
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+
+        {/*Title*/}
+        <Text style={styles.title}>Add Expense</Text>
+
+        {/*Select Member 1*/}
+        <View style={styles.memberRow}>
+          <Text style={styles.member}>Billed Member</Text>
+          <View style={styles.addMembers}>
+            <Picker
+              selectedValue={selectedMember}
+              style={styles.addMemberPicker}
+              onValueChange={value => setSelectedMember(value)}>
+              {myUsers}
+            </Picker>
+          </View>
+        </View>
+
+        {/*Amount*/}
+        <View style={styles.action}>
+          <Feather name={'dollar-sign'} color="white" size={22} />
+          <TextInput
+            style={styles.inputEmail}
+            keyboardType={'number-pad'}
+            placeholder={'Amount'}
+            placeholderTextColor={'grey'}
+            onChangeText={val => amountInputChange(val)}
+            onEndEditing={e => handleValidAmount(e.nativeEvent.text)}
+          />
+          {data.check_amountInputChange ? (
+            <Animatable.View animation="bounceIn">
+              <Feather name="check-circle" color="#009387" size={20} />
+            </Animatable.View>
+          ) : null}
+        </View>
+        {/*Show error message for a non valid Group name*/}
+        {data.isValidAmount ? null : (
+          <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>Invalid Amount</Text>
+          </Animatable.View>
+        )}
+
+        {/*Description*/}
+        <View style={styles.action}>
+          <Feather name={'list'} color="white" size={22} />
+          <TextInput
+            style={styles.inputEmail}
+            placeholder={'Description'}
+            placeholderTextColor={'grey'}
+            onChangeText={val => descriptionInputChange(val)}
+            onEndEditing={e => handleValidDescription(e.nativeEvent.text)}
+          />
+          {data.check_desciptionInputChange ? (
+            <Animatable.View animation="bounceIn">
+              <Feather name="check-circle" color="#009387" size={20} />
+            </Animatable.View>
+          ) : null}
+        </View>
+        {/*Show error messgae for a non valid email*/}
+        {data.isValidDescription ? null : (
+          <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>Invalid Description</Text>
+          </Animatable.View>
+        )}
+
+        {/*Add*/}
+        <FilledButton
+          title={'Add'}
+          style={styles.loginButton}
+          onPress={() => {
+            addGroupHandle(data.amount, data.description, selectedMember);
+          }}
+        />
+      </View>
+    );
+  }
+  // If no group was selected, display an error message.
+  else
+  {
+    return (
+      <View style = {styles.container}>
       <Feather
         style={styles.closeIcon}
         name={'x-circle'}
@@ -196,80 +297,11 @@ export function AddExpense({route, navigation}) {
           navigation.goBack();
         }}
       />
-
-      {/*Title*/}
-      <Text style={styles.title}>Add Expense</Text>
-
-      {/*Select Member 1*/}
-      <View style={styles.memberRow}>
-        <Text style={styles.member}>Billed Member</Text>
-        <View style={styles.addMembers}>
-          <Picker
-            selectedValue={selectedMember}
-            style={styles.addMemberPicker}
-            onValueChange={value => setSelectedMember(value)}>
-            {myUsers}
-          </Picker>
-        </View>
+      <Text style = {styles.noGroupError1}> No Group Selected! {"\n"} </Text>
+      <Text style = {styles.noGroupError2}> Please return to the Home page and select a group before continuing.  </Text>
       </View>
-
-      {/*Amount*/}
-      <View style={styles.action}>
-        <Feather name={'dollar-sign'} color="white" size={22} />
-        <TextInput
-          style={styles.inputemail}
-          keyboardType={'number-pad'}
-          placeholder={'Amount'}
-          placeholderTextColor={'grey'}
-          onChangeText={val => amountInputChange(val)}
-          onEndEditing={e => handleValidAmount(e.nativeEvent.text)}
-        />
-        {data.check_amountInputChange ? (
-          <Animatable.View animation="bounceIn">
-            <Feather name="check-circle" color="#009387" size={20} />
-          </Animatable.View>
-        ) : null}
-      </View>
-      {/*Show error message for a non valid Group name*/}
-      {data.isValidAmount ? null : (
-        <Animatable.View animation="fadeInLeft" duration={500}>
-          <Text style={styles.errorMsg}>Invalid Number</Text>
-        </Animatable.View>
-      )}
-
-      {/*Description*/}
-      <View style={styles.action}>
-        <Feather name={'list'} color="white" size={22} />
-        <TextInput
-          style={styles.inputemail}
-          placeholder={'Description'}
-          placeholderTextColor={'grey'}
-          onChangeText={val => descriptionInputChange(val)}
-          onEndEditing={e => handleValidDescription(e.nativeEvent.text)}
-        />
-        {data.check_desciptionInputChange ? (
-          <Animatable.View animation="bounceIn">
-            <Feather name="check-circle" color="#009387" size={20} />
-          </Animatable.View>
-        ) : null}
-      </View>
-      {/*Show error messgae for a non valid email*/}
-      {data.isValidDescription ? null : (
-        <Animatable.View animation="fadeInLeft" duration={500}>
-          <Text style={styles.errorMsg}>Description is too short</Text>
-        </Animatable.View>
-      )}
-
-      {/*Add*/}
-      <FilledButton
-        title={'Add'}
-        style={styles.loginButton}
-        onPress={() => {
-          addGroupHandle(data.amount, data.description, selectedMember);
-        }}
-      />
-    </View>
-  );
+    );
+  }
 }
 
 // Styles
@@ -316,7 +348,7 @@ const styles = StyleSheet.create({
   loginButton: {
     marginVertical: 23,
   },
-  inputemail: {
+  inputEmail: {
     fontSize: 16,
     flex: 1,
     marginTop: Platform.OS === 'ios' ? 0 : -12,
@@ -338,4 +370,16 @@ const styles = StyleSheet.create({
     top: 40,
     right: 20,
   },
+  noGroupError1: {
+    color: 'white',
+    fontSize: 36,
+    alignItems: 'center',
+    textAlign: 'center'
+  },
+  noGroupError2: {
+    color: 'white',
+    fontSize: 18,
+    alignItems: 'center',
+    textAlign: 'center'
+  }
 });

@@ -21,7 +21,6 @@ import jwt_decode from 'jwt-decode';
 const BASE_URL = 'https://cop4331-test-2.herokuapp.com/';
 
 const RegisterScreen = ({navigation}) => {
-  
   const {logIn} = React.useContext(AuthContext);
 
   const [data, setData] = React.useState({
@@ -141,9 +140,13 @@ const RegisterScreen = ({navigation}) => {
     });
   };
 
-
   // Register
-  const registerHandle = async (email, username, password, confirm_password) => {
+  const registerHandle = async (
+    email,
+    username,
+    password,
+    confirm_password,
+  ) => {
     // email = "test@test.com";
     // username = "testes";
     // password = "123456789";
@@ -169,12 +172,8 @@ const RegisterScreen = ({navigation}) => {
       return;
     }
 
-    if (password != confirm_password){
-      Alert.alert(
-        'Error!',
-        'Password Missmatch',
-        [{text: 'OK'}],
-      );
+    if (password != confirm_password) {
+      Alert.alert('Error!', 'Password Missmatch', [{text: 'OK'}]);
       return;
     }
 
@@ -207,13 +206,11 @@ const RegisterScreen = ({navigation}) => {
         // Show an alert box
         Alert.alert(
           'Meridian Registration',
-          'User Succesfully Registred\nname: ' +
+          'You have been Succesfully Registred\nUsername: ' +
             res.name +
-            '\nemail: ' +
-            res.email +
-            '\npassword: ' +
-            res.password,
-          +[{text: 'OK'}],
+            '\nEmail: ' +
+            res.email, 
+          [{text: 'OK'}],
         );
 
         navigation.navigate('LoginScreen');
@@ -226,9 +223,16 @@ const RegisterScreen = ({navigation}) => {
           ...data,
           message: 'User failed to register',
         });
-        // Show an alert box
-        Alert.alert('Error', 'User failed to register', [{text: 'OK'}]);
-        return;
+        if (res.email != undefined) {
+          Alert.alert('Error', res.email, [{text: 'OK'}]);
+          return;
+        } else if (res.name != undefined) {
+          Alert.alert('Error', res.name, [{text: 'OK'}]);
+          return;
+        } else if (res.password != undefined) {
+          Alert.alert('Error', res.password, [{text: 'OK'}]);
+          return;
+        }
       }
     } catch (e) {
       Alert.alert('Error', e.toString(), [{text: 'OK'}]);
@@ -315,11 +319,13 @@ const RegisterScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
       {/*Show error messgae for a non valid Password*/}
-      { data.isValidPassword ? null : 
+      {data.isValidPassword ? null : (
         <Animatable.View animation="fadeInLeft" duration={500}>
-        <Text style={styles.errorMsg}>Password must be 6 characters long.</Text>
+          <Text style={styles.errorMsg}>
+            Password must be 6 characters long.
+          </Text>
         </Animatable.View>
-      }
+      )}
 
       {/*retype password*/}
       <View style={styles.action}>
@@ -356,7 +362,12 @@ const RegisterScreen = ({navigation}) => {
         title={'Register'}
         style={styles.loginButton}
         onPress={() => {
-          registerHandle(data.email, data.username, data.password, data.confirm_password);
+          registerHandle(
+            data.email,
+            data.username,
+            data.password,
+            data.confirm_password,
+          );
         }}
       />
     </View>

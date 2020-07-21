@@ -73,6 +73,17 @@ export function MembersScreen(navigation) {
 
   return (
     <View style={styles.container}>
+      {/* {members != null ? (
+        <MembersList itemList={members} />
+      ) : (
+        <View>
+          <Text style={styles.titleMessage}>No Group Selected</Text>
+          <Text style={styles.textMessage}>
+            Please return to the Home page and select a group before continuing
+          </Text>
+        </View>
+      )} */}
+
       <MembersList itemList={members} />
     </View>
   );
@@ -87,5 +98,18 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 32,
     color: 'white',
+  },
+
+  textMessage: {
+    fontSize: 18,
+    marginTop: 10,
+    color: 'grey',
+    textAlign: 'center',
+  },
+  titleMessage: {
+    fontSize: 30,
+    marginTop: 200,
+    color: 'grey',
+    textAlign: 'center',
   },
 });

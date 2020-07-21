@@ -86,7 +86,7 @@ export function DrawerContent(props) {
                 props.navigation.navigate('Profile');
               }}
             />
-            <DrawerItem
+            {/* <DrawerItem
               icon={({color, size}) => (
                 <Feather name="settings" color={color} size={size} />
               )}
@@ -94,7 +94,7 @@ export function DrawerContent(props) {
               onPress={() => {
                 props.navigation.navigate('Settings');
               }}
-            />
+            /> */}
             <DrawerItem
               icon={({color, size}) => (
                 <Feather name="code" color={color} size={size} />
